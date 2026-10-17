@@ -60,7 +60,8 @@ export function createApp({ ctx, receptionist, dbKind, serveWeb }: AppDeps) {
         : false,
     }),
   );
-  app.use(cors({ origin: ctx.config.WEB_ORIGIN, credentials: true }));
+  const allowedOrigins = ctx.config.WEB_ORIGIN.split(",").map((o) => o.trim());
+  app.use(cors({ origin: allowedOrigins.length === 1 ? allowedOrigins[0] : allowedOrigins, credentials: true }));
   app.use(express.json({ limit: "100kb" }));
 
   app.use(healthRouter(ctx, dbKind));

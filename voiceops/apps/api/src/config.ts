@@ -14,6 +14,7 @@ const optionalString = z
 const EnvSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   API_PORT: z.coerce.number().int().positive().default(4000),
+  /** Comma-separated list of allowed CORS origins. */
   WEB_ORIGIN: z.string().default("http://localhost:5173"),
   /** Empty = embedded Postgres (PGlite) stored in PGLITE_DIR. Set a postgres:// URL to use a real server. */
   DATABASE_URL: optionalString,

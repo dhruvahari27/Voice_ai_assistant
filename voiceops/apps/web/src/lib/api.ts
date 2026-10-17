@@ -11,8 +11,10 @@ export class ApiError extends Error {
   }
 }
 
+const API_BASE = (import.meta as { env?: { VITE_API_URL?: string } }).env?.VITE_API_URL ?? "";
+
 async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
-  const res = await fetch(path, {
+  const res = await fetch(API_BASE + path, {
     method,
     credentials: "include",
     headers: body === undefined ? { accept: "application/json" } : { "content-type": "application/json", accept: "application/json" },

@@ -79,8 +79,9 @@ export function authRouter(ctx: Ctx) {
   const r = Router();
   const secret = ctx.config.SESSION_SECRET;
   const secure = ctx.config.NODE_ENV === "production";
+  const sameSite = secure ? "None" : "Lax";
   const cookie = (value: string, maxAge: number) =>
-    `${SESSION_COOKIE}=${value}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${secure ? "; Secure" : ""}`;
+    `${SESSION_COOKIE}=${value}; Path=/; HttpOnly; SameSite=${sameSite}; Max-Age=${maxAge}${secure ? "; Secure" : ""}`;
   const startSession = (res: { setHeader(k: string, v: string): void }, user: typeof users.$inferSelect) => {
     const token = signSession({ userId: user.id, businessId: user.businessId, role: user.role, pv: passwordVersion(user.passwordHash, secret) }, secret);
     res.setHeader("set-cookie", cookie(token, SESSION_TTL_SECONDS));
