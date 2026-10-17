@@ -1,0 +1,27 @@
+node_modules/
+dist/
+build/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Embedded database (local dev)
+.data/
+
+# Log written by start-voiceops.ps1
+voiceops-log.txt

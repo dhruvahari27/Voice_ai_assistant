@@ -1,0 +1,7 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node"]
+  },
+  "include": ["src", "scripts", "test", "eval", "vitest.config.ts", "drizzle.config.ts", "tsup.config.ts"]
+}

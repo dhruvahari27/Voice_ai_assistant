@@ -1,0 +1,18 @@
+{
+  "name": "voiceops",
+  "private": true,
+  "version": "0.1.0",
+  "description": "VoiceOps AI: realtime voice front desk for small businesses",
+  "engines": {
+    "node": ">=22.9"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter @voiceops/api --filter @voiceops/web dev",
+    "build": "pnpm --filter @voiceops/web build && pnpm --filter @voiceops/api build",
+    "start": "pnpm --filter @voiceops/api start",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck",
+    "eval": "pnpm --filter @voiceops/api eval",
+    "db:reset": "pnpm --filter @voiceops/api db:reset"
+  }
+}

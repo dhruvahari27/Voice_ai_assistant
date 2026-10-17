@@ -1,0 +1,27 @@
+node_modules/
+dist/
+build/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Local database
+.data/
+*.db
+*.db-shm
+*.db-wal
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+.idea/

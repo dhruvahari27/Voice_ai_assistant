@@ -1,0 +1,12 @@
+packages:
+  - "apps/api"
+  - "apps/web"
+  - "packages/*"
+
+# pnpm 11
+allowBuilds:
+  esbuild: true
+
+# pnpm 10
+onlyBuiltDependencies:
+  - "esbuild"

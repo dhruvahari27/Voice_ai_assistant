@@ -1,0 +1,151 @@
+@import "tailwindcss";
+@import "@fontsource-variable/bricolage-grotesque";
+@import "@fontsource-variable/figtree";
+
+/*
+ * VoiceOps palette: a night-blue front desk (sidebar, sign-in) around a cool, quiet work surface.
+ * Marigold is reserved for the receptionist's voice and for things that need a person.
+ */
+@theme {
+  --font-sans: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque Variable", "Figtree Variable", ui-sans-serif, sans-serif;
+
+  --color-ground: #f1f3f7;
+  --color-panel: #ffffff;
+  --color-sunken: #f6f8fb;
+  --color-ink: #131c2e;
+  --color-ink-soft: #3f4a5e;
+  --color-muted: #65718a;
+  --color-line: #e2e7ef;
+  --color-line-strong: #cad2de;
+  --color-navy: #1a2a44;
+  --color-navy-hover: #0f1d33;
+
+  --color-night: #0d1626;
+  --color-night-raised: #152139;
+  --color-night-line: #233150;
+  --color-night-ink: #e8edf6;
+  --color-night-muted: #8f9cb6;
+
+  --color-marigold: #f2a20f;
+  --color-marigold-soft: #fff3d9;
+  --color-marigold-ink: #7a4f00;
+  --color-ok: #1f8a57;
+  --color-ok-soft: #e3f4ea;
+  --color-bad: #c23a26;
+  --color-bad-soft: #fceae6;
+  --color-info: #2a64b8;
+  --color-info-soft: #e8f0fb;
+
+  --shadow-panel: 0 1px 2px rgb(19 28 46 / 0.04), 0 1px 1px rgb(19 28 46 / 0.03);
+  --shadow-lift: 0 12px 32px -12px rgb(13 22 38 / 0.28);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-ground: #0a101b;
+    --color-panel: #111a28;
+    --color-sunken: #0e1622;
+    --color-ink: #e6ebf3;
+    --color-ink-soft: #b7c1d1;
+    --color-muted: #8794aa;
+    --color-line: #222d3f;
+    --color-line-strong: #33405a;
+    --color-navy: #d3dded;
+    --color-navy-hover: #eaf0f8;
+    --color-night: #070c16;
+    --color-night-raised: #0f1828;
+    --color-night-line: #1c2740;
+    --color-marigold: #f5b13a;
+    --color-marigold-soft: #33270f;
+    --color-marigold-ink: #f7d28a;
+    --color-ok: #59c48b;
+    --color-ok-soft: #12301f;
+    --color-bad: #f07a65;
+    --color-bad-soft: #3a1b16;
+    --color-info: #82b1ec;
+    --color-info-soft: #152841;
+  }
+}
+
+html {
+  color-scheme: light dark;
+}
+
+body {
+  @apply bg-ground text-ink antialiased;
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  font-feature-settings: "tnum" 1;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-marigold);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-marigold) 35%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* The live-call pulse on the talk page. */
+@keyframes ring {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-marigold) 55%, transparent); }
+  100% { box-shadow: 0 0 0 22px transparent; }
+}
+.listening {
+  animation: ring 1.2s ease-out infinite;
+}
+
+/* The receptionist's voice: a small marigold waveform. The one ambient motion in the app. */
+@keyframes voice {
+  0%, 100% { transform: scaleY(0.35); }
+  50% { transform: scaleY(1); }
+}
+.voice-bars > span {
+  display: block;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--color-marigold);
+  transform-origin: center;
+  animation: voice 1.1s ease-in-out infinite;
+}
+.voice-bars > span:nth-child(2) { animation-delay: -0.85s; }
+.voice-bars > span:nth-child(3) { animation-delay: -0.55s; }
+.voice-bars > span:nth-child(4) { animation-delay: -0.3s; }
+.voice-bars.still > span { animation: none; transform: scaleY(0.5); }
+
+/* Sign-in transcript: lines arrive one after another, once. */
+@keyframes arrive {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.arrive {
+  opacity: 0;
+  animation: arrive 0.5s ease-out forwards;
+}
+
+/* Subtle dotted texture for night surfaces. */
+.night-texture {
+  background-color: var(--color-night);
+  background-image: radial-gradient(color-mix(in srgb, var(--color-night-ink) 7%, transparent) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
